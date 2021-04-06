@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  clean-ts:
+    container_name: clean-ts
+    image: node:14.16.0
+    tty: true
+    build: 
+      context: .
+      dockerfile: DockerFile-node
+    ports:
+      - '80:80'
+    volumes:
+      - ./clean-ts:/clean-ts
+    depends_on:
+      - clean-ts-db
+  clean-ts-db:
+    container_name: clean-ts-db
+    image: mysql:5.7
+    build:
+      context: .
+      dockerfile: dockerfile-MySQL
+    env_file: ./clean-ts/.env
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: MYSQL_DATABASE
+      MYSQL_USER: MYSQL_USER
+      MYSQL_PASSWORD: MYSQL_PASSWORD
