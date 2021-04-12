@@ -5,12 +5,9 @@ export class Task {
   private _createdAt: string
   private _updatedAt: string
 
-  constructor(id: number, title: string, description: string, createdAt: string, updatedAt: string) {
-    this._id = id;
+  constructor(title: string, description: string) {
     this._title = title;
     this._description = description;
-    this._createdAt = createdAt;
-    this._updatedAt = updatedAt;
   }
 
   get id(): number {
