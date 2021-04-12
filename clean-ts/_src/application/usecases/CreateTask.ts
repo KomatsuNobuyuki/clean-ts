@@ -1,3 +1,4 @@
+import { isTypeAliasDeclaration } from 'typescript';
 import { Task } from '../../domain/models/Task';
 import { ITaskRepository } from '../repositories/ITaskRepository';
 
@@ -10,5 +11,6 @@ export class CreateTask {
 
   execute(title: string, description: string) {
     const task = new Task(title, description);
+    return this._taskRepository.persist(task);
   }
 }
