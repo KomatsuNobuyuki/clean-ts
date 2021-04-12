@@ -1,9 +1,11 @@
+import dayjs from 'dayjs';
+
 export class Task {
   private _id: number
   private _title: string
   private _description: string
-  private _createdAt: string
-  private _updatedAt: string
+  private _createdAt: dayjs.Dayjs
+  private _updatedAt: dayjs.Dayjs
 
   constructor(title: string, description: string) {
     this._title = title;
@@ -38,7 +40,7 @@ export class Task {
     return this._createdAt;
   }
 
-  set createdAt(createdAt: string) {
+  set createdAt(createdAt: dayjs.Dayjs) {
     this._createdAt = createdAt;
   }
 
@@ -46,7 +48,7 @@ export class Task {
     return this._updatedAt;
   }
 
-  set updatedAt(updatedAt: string) {
+  set updatedAt(updatedAt: dayjs.Dayjs) {
     this._updatedAt = updatedAt;
   }
 }
