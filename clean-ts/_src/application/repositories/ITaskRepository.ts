@@ -2,8 +2,8 @@ import { Task } from '../../domain/models/Task';
 
 export abstract class ITaskRepository {
   abstract findAll(): Promise<Array<Task>>
-  abstract findOne(): Promise<Task>
-  abstract update(): Promise<Task>
-  abstract delete(): Promise<Task>
-  abstract persist(): Promise<Task>
+  abstract findOne(id: number): Promise<Task>
+  abstract update(task: Task): Promise<Task>
+  abstract delete(task: Task): Promise<Task>
+  abstract persist(task: Task): Promise<Task>
 }
