@@ -1,9 +1,14 @@
 import mysql from 'mysql';
 import dotenv from 'dotenv';
 import { IDBConnection } from '../interfaces/database/IDBConnection';
+import util from 'util';
+
+interface PromisifiedPool extends Omit<mysql.Pool, 'query'> {
+  query: mysql.QueryFunction | Function;
+}
 
 class MySqlConnection {
-  private pool: mysql.Pool
+  private pool: PromisifiedPool
 
   constructor() {
     dotenv.config();
@@ -29,5 +34,23 @@ class MySqlConnection {
 
       if (connection) connection.release();
     });
+
+    this.pool.query = util.promisify(this.pool.query);
+
+    this.pool.on('connection', (connection: mysql.PoolConnection) => {
+      console.log('mysql connection create')
+    });
+
+    this.pool.on('release', (connection: mysql.PoolConnection) => {
+      console.log('Connection %d released', connection.threadId)
+    });
+  }
+
+  execute(query: string, params: any = null) {
+    if(params !== null) {
+      return this.pool.query
+    } else {
+      return this.pool.query(query);
+    }
   }
 }
