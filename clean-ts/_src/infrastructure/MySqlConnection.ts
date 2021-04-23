@@ -7,7 +7,7 @@ interface PromisifiedPool extends Omit<mysql.Pool, 'query'> {
   query: mysql.QueryFunction | Function;
 }
 
-class MySqlConnection {
+export class MySqlConnection {
   private pool: PromisifiedPool
 
   constructor() {
