@@ -1,4 +1,10 @@
 import dayjs from 'dayjs';
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(timezone);
+dayjs.extend(utc);
+dayjs.tz.setDefault("Asia/Tokyo");
 
 export class Task {
   private _id: number
@@ -50,5 +56,21 @@ export class Task {
 
   set updatedAt(updatedAt: dayjs.Dayjs) {
     this._updatedAt = updatedAt;
+  }
+
+  getJSTCreatedAt(): string | null {
+    if (this._createdAt) {
+      return  this._createdAt.tz().format('YYYY-MM-DD HH:mm:ss');
+    }
+
+    return null;
+  }
+
+  getJSTUpdetedAt(): string | null {
+    if(this._updatedAt) {
+      return  this._updatedAt.tz().format('YYYY-MM-DD HH:mm:ss');
+    }
+
+    return null
   }
 }
