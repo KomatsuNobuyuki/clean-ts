@@ -7,7 +7,7 @@ export class ListTasks {
     this._taskRepository = taskRepository
   }
 
-  execute() {
+  async execute() {
     return this._taskRepository.findAll();
   }
 }

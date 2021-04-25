@@ -7,7 +7,7 @@ export class GetTask {
     this._taskRepository = taskrepository;
   }
 
-  execute(id: number) {
+  async execute(id: number) {
     return this._taskRepository.findOne(id);
   }
 }
